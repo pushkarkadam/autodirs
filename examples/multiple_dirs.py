@@ -1,8 +1,6 @@
 import sys
 sys.path.append('../')
 
-from source.directories import Directories as Di
+from directories import directories as di
 
-dir = Di("sub/houses")
-
-dir.group_by_text_files("text_files")
+di.group_by_text_files("text_files", path="sub/hogwarts")
