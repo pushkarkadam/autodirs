@@ -4,33 +4,27 @@ import glob
 import warnings
 
 
-def _create_path_from_param(dir_name, root, path):
+def _create_path_from_param(dir_name, path):
     """Returns the path based upon the parameters passed.
 
     :param dir_list: Name of the subdirectory.
-    :param root: Root directory to contain subdirectories.
     :param path: Path where the root directory needs to be created.
 
     :returns final_path: The final path to the subdirectory.
     """
 
-    if not root or not path:
-        warnings.warn("Root folder or path not provided. This will create multiple folders in unexpected location!")
+    if not path:
+        warnings.warn("Path not provided. This will create multiple folders in unexpected location!")
         response = input("Do you wish to continue?[y/n]: ")
 
         if response == 'y':
-            if root and path:
-                final_path = path + "/" + root + "/" + dir
-            elif path and not root:
-                final_path = path + "/" + dir
-            elif root and not path:
-                final_path = root + "/" + dir
-            else:
-                final_path = dir
-
+            final_path =  dir_name
             return final_path
         else:
             sys.exit(1)
+    else:
+        final_path = path + "/" + dir_name
+        return final_path
 
 
 def _sub_dir_files(dir_name):
@@ -53,8 +47,23 @@ def _sub_dir_files(dir_name):
 
     return file_path, file_list
 
+def _create_directories(sub_dir_list, path=""):
+    """Creates set of directory from the list.
+    :param sub_dir_list: List of the subdirectory.
+    :param path: Path to store the subdirectories.
+    """
+    for sub_dir in sub_dir_list:
+        dir = _create_path_from_param(sub_dir, path)
+        try:
+            if not os.path.exists(dir):
+                os.makedirs(dir)
+            else:
+                print(f"Directory: {dir} already exists!")
+        except TypeError as e:
+            print(e)
+            raise
 
-def create_directories(sub_dir_names, path=""):
+def create_directories_from_text(sub_dir_names, path=""):
     """Creates the sub directories inside a directory.
 
     :param sub_dir_names: A text file with the list of the sub directories.
@@ -66,16 +75,7 @@ def create_directories(sub_dir_names, path=""):
     with open(sub_dir_names) as f:
         sub_dir_list = f.read().splitlines()
 
-    for sub_dir in sub_dir_list:
-        dir = path + "/" + sub_dir
-        try:
-            if not os.path.exists(dir):
-                os.makedirs(dir)
-            else:
-                print(f"Directory: {dir} already exists!")
-        except TypeError as e:
-            print(e)
-            raise
+    _create_directories(sub_dir_list, path)
 
 
 def group_by_text_files(text_path, path=""):
@@ -87,18 +87,20 @@ def group_by_text_files(text_path, path=""):
     :param path: path where the directories must be created.
     """
 
-    file_path, file_list = _sub_dir_files(text_path)
+    file_path, file_heading = _sub_dir_files(text_path)
 
-    for file in file_path:
-        final_path = path + "/" + file
-        create_directories(file, final_path)
+    for (file, heading) in zip(file_path, file_heading):
+        with open(file) as f:
+            sub_dir_list = f.read().splitlines()
+
+        final_path = path + "/" + heading
+        _create_directories(sub_dir_list, final_path)
 
 
-def create_directories_from_list(dir_list, root="", path=""):
+def create_directories_from_list(dir_list, path=""):
     """Creates directory structure from the list provided.
 
     :param dir_list: List of the subdirectories.
-    :param root: Root directory name.
     :param path: Path where the file structure must be created.
     """
 
