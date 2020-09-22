@@ -31,3 +31,24 @@ def test_group_by_text_files():
     "tests/test_dir/test_group_by_text_files/test_files/THE GREY LADY"
     ]
     assert(file_path == test_file_path)
+
+def test_create_directories_from_list():
+    ravenclaw = [
+    "ROWENA RAVENCLAW",
+    "LUNA LOVEGOOD",
+    "GILDEROY LOCKHART",
+    "THE GREY LADY"
+    ]
+
+    di.create_directories_from_list(ravenclaw, "tests/test_dir/test_create_directories_from_list")
+
+    file_path = [dir.path for dir in os.scandir("tests/test_dir/test_create_directories_from_list/") if dir.is_dir()]
+
+    test_file_path = [
+    "tests/test_dir/test_create_directories_from_list/GILDEROY LOCKHART",
+    "tests/test_dir/test_create_directories_from_list/LUNA LOVEGOOD",
+    "tests/test_dir/test_create_directories_from_list/ROWENA RAVENCLAW",
+    "tests/test_dir/test_create_directories_from_list/THE GREY LADY"
+    ]
+
+    assert(file_path == test_file_path)

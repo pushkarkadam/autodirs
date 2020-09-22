@@ -103,14 +103,4 @@ def create_directories_from_list(dir_list, path=""):
     :param dir_list: List of the subdirectories.
     :param path: Path where the file structure must be created.
     """
-
-    for dir in dir_list:
-        final_path = _create_path_from_param(dir, root, path)
-        try:
-            if not os.path.exists(final_path):
-                os.makedirs(final_path)
-            else:
-                print(f"Directory: {final_path} already exists!")
-        except TypeError as e:
-            print(e)
-            raise
+    _create_directories(dir_list, path)
