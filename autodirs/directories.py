@@ -15,7 +15,7 @@ def _create_path_from_param(dir_name, root, path):
     """
 
     if not root or not path:
-        warnings.simplefilter("Root folder or path not provided. This will create multiple folders!")
+        warnings.warn("Root folder or path not provided. This will create multiple folders in unexpected location!")
         response = input("Do you wish to continue?[y/n]: ")
 
         if response == 'n':
@@ -66,8 +66,8 @@ def create_directories(sub_dir_names, path=""):
     with open(sub_dir_names) as f:
         sub_dir_list = f.read().splitlines()
 
-    for i in range(len(sub_dir_list)):
-        dir = path + "/" + sub_dir_list[i]
+    for sub_dir in sub_dir_list:
+        dir = path + "/" + sub_dir
         try:
             if not os.path.exists(dir):
                 os.makedirs(dir)
