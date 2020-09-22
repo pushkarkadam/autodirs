@@ -18,19 +18,19 @@ def _create_path_from_param(dir_name, root, path):
         warnings.warn("Root folder or path not provided. This will create multiple folders in unexpected location!")
         response = input("Do you wish to continue?[y/n]: ")
 
-        if response == 'n':
+        if response == 'y':
+            if root and path:
+                final_path = path + "/" + root + "/" + dir
+            elif path and not root:
+                final_path = path + "/" + dir
+            elif root and not path:
+                final_path = root + "/" + dir
+            else:
+                final_path = dir
+
+            return final_path
+        else:
             sys.exit(1)
-
-    if root and path:
-        final_path = path + "/" + root + "/" + dir
-    elif path and not root:
-        final_path = path + "/" + dir
-    elif root and not path:
-        final_path = root + "/" + dir
-    else:
-        final_path = dir
-
-    return final_path
 
 
 def _sub_dir_files(dir_name):
