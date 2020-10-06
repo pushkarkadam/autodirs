@@ -43,8 +43,8 @@ def _sub_dir_files(dir_name):
 
     :param dir_name: Name of the directory where the text files are stored.
 
-    :returns file_path: List of all the files present in {dir_name}
-    :returns file_list: List of all the file titles present in {dir_name}
+    :returns file_path: List of all the files present in `dir_name`
+    :returns file_list: List of all the file titles present in `dir_name`
 
     :raises ValueError: Invalid input.
     """
@@ -81,7 +81,7 @@ def create_directories_from_text(sub_dir_names, path="", with_text=False):
     """Creates the sub directories inside a directory.
 
     :param sub_dir_names: A text file with the list of the sub directories.
-    :param path: The file path to create the subdirectories from {sub_dir_list}  (Default="").
+    :param path: The file path to create the subdirectories from `sub_dir_list`  (Default="").
     :param with_text: Boolean that makes a text file with the subdirectory name. (Default=False)
 
     :raises TypeError: Missing positional arguments.
@@ -95,7 +95,7 @@ def create_directories_from_text(sub_dir_names, path="", with_text=False):
 
 def group_by_text_files(text_path, path="", with_text=False):
     """Creates directory structure to the set path from a group of text files.
-    The {text_path} file name forms the directory in the root of the {path}.
+    The `text_path` file name forms the directory in the root of the `path`.
     The list inside the text files form the sub directories.
 
     :param text_path: path where the text files are located.
