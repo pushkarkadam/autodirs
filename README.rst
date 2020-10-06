@@ -1,0 +1,31 @@
+================
+Auto Directories
+================
+
+|build-status|
+
+.. |build-status| image:: https://github.com/pushkarkadam/autodirs/workflows/Python%20application/badge.svg
+   :target: https://github.com/pushkarkadam/autodirs/actions
+
+A python project to automatically generate directories and sub-directories.
+
+Features
+--------
+
+- Create directories from text files
+- Group by text Files
+- Create directories from list
+
+Installation
+------------
+
+Install autodirs by running:
+
+``git clone https://github.com/pushkarkadam/autodirs.git``
+
+License
+-------
+
+`MIT`_ (c) 2020 Pushkar Kadam
+
+.. _MIT: LICENSE
