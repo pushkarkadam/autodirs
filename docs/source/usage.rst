@@ -1,8 +1,10 @@
+.. highlight:: shell
+
 =====
 Usage
 =====
 
-To use autodirs in a project or in python terminal
+To use autodirs in a project or in python terminal ::
 
     import autodirs.directories as di
 
@@ -17,7 +19,7 @@ Create directories from a text file
 
 Create a text file with the names of all the directories that need to be created.
 
-The user can create multiple directory by using the following command in the python console.
+The user can create multiple directory by using the following command in the python console. ::
 
     import autodirs.directories as di
 
@@ -29,7 +31,7 @@ Create multiple directories
 
 If you want to create nested directories using text files bundle all the text files which include the name of directories you wish to create.
 
-For example, if you want to create a group of directories such as:
+For example, if you want to create a group of directories such as::
 
     house/
 
@@ -47,13 +49,13 @@ For example, if you want to create a group of directories such as:
 
 To create a directory structure like the above, store the directory names inside a text file.
 
-**Example**: gryffindor.txt file should contain the following directory names.
+**Example**: gryffindor.txt file should contain the following directory names::
 
     HARRY POTTER
 
     HERMOINE GRANGER
 
-**Example**: hufflepuff.txt should contain the following directory names.
+**Example**: hufflepuff.txt should contain the following directory names::
 
     HELGA HUFFLEPUFF
 
@@ -65,7 +67,7 @@ Both the text files: gryffindor.txt and hufflepuff.txt must be stored inside hou
 Create directories from list
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you want to create directories from the list use the following code.
+If you want to create directories from the list use the following code::
 
     import autodirs.directories as di
 
