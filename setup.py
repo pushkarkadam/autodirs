@@ -3,7 +3,7 @@ import setuptools
 with open("README.rst", "r") as fh:
     long_description = fh.read()
 
-setup(
+setuptools.setup(
     name="autodirs",
     version="1.0.0",
     author="Pushkar Kadam",

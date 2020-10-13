@@ -2,7 +2,7 @@
 Auto Directories
 ================
 
-|build-status| |documentation-status|
+|build-status| |documentation-status| |PyPI|
 
 .. |build-status| image:: https://github.com/pushkarkadam/autodirs/workflows/Python%20application/badge.svg
    :target: https://github.com/pushkarkadam/autodirs/actions
@@ -10,6 +10,9 @@ Auto Directories
 .. |documentation-status| image:: https://readthedocs.org/projects/autodirs/badge/?version=latest
    :target: https://autodirs.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
+
+.. |PyPI| image:: https://img.shields.io/pypi/v/autodirs.svg
+   :target: https://pypi.org/project/autodirs/1.0.0/
 
 A python project to automatically generate directories and sub-directories.
 
