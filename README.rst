@@ -28,7 +28,7 @@ Installation
 
 Install autodirs by running:
 
-``git clone https://github.com/pushkarkadam/autodirs.git``
+```pip install autodirs==1.0.0``
 
 License
 -------

@@ -4,4 +4,4 @@ Installation
 
 Use git to install the application.
 
-``git clone https://github.com/pushkarkadam/autodirs.git``
+```pip install autodirs==1.0.0``
