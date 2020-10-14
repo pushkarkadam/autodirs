@@ -5,7 +5,7 @@ with open("README.rst", "r") as fh:
 
 setuptools.setup(
     name="autodirs",
-    version="1.0.0",
+    version="1.0.1",
     author="Pushkar Kadam",
     author_email="pushkarkadam17@outlook.com",
     description="A python project to automatically generate directories and sub-directories",
