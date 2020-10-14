@@ -12,7 +12,7 @@ Auto Directories
    :alt: Documentation Status
 
 .. |PyPI| image:: https://img.shields.io/pypi/v/autodirs.svg
-   :target: https://pypi.org/project/autodirs/1.0.0/
+   :target: https://pypi.org/project/autodirs/
 
 A python project to automatically generate directories and sub-directories.
 
@@ -28,7 +28,7 @@ Installation
 
 Install autodirs by running:
 
-``pip install autodirs==1.0.0``
+``pip install autodirs``
 
 License
 -------
