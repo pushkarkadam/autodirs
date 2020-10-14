@@ -28,7 +28,7 @@ Installation
 
 Install autodirs by running:
 
-```pip install autodirs==1.0.0``
+``pip install autodirs==1.0.0``
 
 License
 -------
