@@ -81,10 +81,15 @@ def create_directories_from_text(sub_dir_names, path="", with_text=False):
     """Creates the sub directories inside a directory.
 
     :param sub_dir_names: A text file with the list of the sub directories.
-    :param path: The file path to create the subdirectories from `sub_dir_list`  (Default="").
+    :param path: The file path to create the subdirectories from ``sub_dir_list``  (Default="").
     :param with_text: Boolean that makes a text file with the subdirectory name. (Default=False)
 
     :raises TypeError: Missing positional arguments.
+
+    :Example:
+
+    >>> import autodirs
+    >>> autodirs.create_directories_from_text(sub_dir_names="sample", path="sample_directories")
     """
 
     with open(sub_dir_names) as f:
@@ -101,6 +106,11 @@ def group_by_text_files(text_path, path="", with_text=False):
     :param text_path: path where the text files are located.
     :param path: path where the directories must be created.
     :param with_text: Boolean that makes a text file with the subdirectory name. (Default=False)
+
+    :Example:
+
+    >>> import autodirs
+    >>> autodirs.group_by_text_files(text_path="text_path", path="sample_directories")
     """
 
     file_path, file_heading = _sub_dir_files(text_path)
@@ -119,5 +129,11 @@ def create_directories_from_list(dir_list, path="", with_text=False):
     :param dir_list: List of the subdirectories.
     :param path: Path where the file structure must be created.
     :param with_text: Boolean that makes a text file with the subdirectory name. (Default=False)
+
+    :Example:
+
+    >>> import autodirs
+    >>> foo = ["bar", "baz"]
+    >>> autodirs.create_directories_from_list(dir_list=foo, path="sample_directories")
     """
     _create_directories(dir_list, path, with_text)
