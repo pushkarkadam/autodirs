@@ -148,6 +148,14 @@ def dir_path_list(dirs, root_path='', list_dir=None):
     :param list_dir: A list that is None and not yet assigned.
 
     :returns list_dir: A list of all the directory paths.
+
+    :Example:
+
+    >>> import autodirs
+    >>> foo_dict = {'sub1': {'sub1_sub1': [], 'sub1_sub2': []}, 'sub2': {'sub2_sub1': []}, 'sub3': []}
+    >>> foo_list = autodirs(foo_dict, root_path='main')
+    >>> print(foo_list)
+    ['main/sub1/sub1_sub1', 'main/sub1/sub1_sub2', 'main/sub2/sub2_sub1', 'main/sub3']
     """
 
     # Makes a deepcopy of root_path into path variable to use in further operations.
