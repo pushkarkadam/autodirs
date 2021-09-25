@@ -2,6 +2,7 @@ import os
 import sys
 import glob
 import warnings
+from copy import deepcopy
 
 
 def _create_text_file(dir_name, path):
@@ -137,3 +138,39 @@ def create_directories_from_list(dir_list, path="", with_text=False):
     >>> autodirs.create_directories_from_list(dir_list=foo, path="sample_directories")
     """
     _create_directories(dir_list, path, with_text)
+
+
+def _dir_path_list(dirs, root_path='', list_dir=None):
+    """Generates a list of all the directory paths from the dirs dictionary
+
+    :param dirs: A dictionary of complex directory structure where the last directory's key has a value of an empty list.
+    :param root_path: A root path where the directory structure must be created. (Default='')
+    :param list_dir: A list that is None and not yet assigned.
+
+    :returns list_dir: A list of all the directory paths.
+    """
+
+    # Makes a deepcopy of root_path into path variable to use in further operations.
+    path = deepcopy(root_path)
+
+    # Creating an empty list only if there is nothing inside yet.
+    # Make sure it executes once in the beginning and remembers all the appended strings.
+    if list_dir is None:
+        list_dir = []
+
+    for k, v in dirs.items():
+        dir = os.path.join(path, k)
+
+        # Checks if the value is a of the type dictionary
+        if isinstance(v, dict):
+            path = deepcopy(dir)
+
+            # Recursive function call
+            _dir_path_list(v, path, list_dir)
+        else:
+            list_dir.append(dir)
+
+        # Again copying the root path before the next iteration
+        path = deepcopy(root_path)
+
+    return list_dir
