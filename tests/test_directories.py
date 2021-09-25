@@ -52,3 +52,15 @@ def test_create_directories_from_list():
     ]
 
     assert(set(file_path) == set(test_file_path))
+
+def test_dir_path_list():
+    dir_dict = {'sub1': {'sub1_sub1': [], 'sub1_sub2': []}, 'sub2': {'sub2_sub1': []}, 'sub3': []}
+
+    result_list = autodirs.dir_path_list(dir_dict, root_path='test_dir/dir_path_list')
+
+    expected_list = ['test_dir/dir_path_list/sub1/sub1_sub1',
+                     'test_dir/dir_path_list/sub1/sub1_sub2',
+                     'test_dir/dir_path_list/sub2/sub2_sub1',
+                     'test_dir/dir_path_list/sub3']
+
+    assert(result_list == expected_list)
