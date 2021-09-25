@@ -64,3 +64,25 @@ def test_dir_path_list():
                      'test_dir/dir_path_list/sub3']
 
     assert(result_list == expected_list)
+
+def test_create_dirs_from_dict():
+    dir_dict = {'sub1': {'sub1_sub1': [], 'sub1_sub2': []}, 'sub2': {'sub2_sub1': []}, 'sub3': []}
+
+    autodirs.create_dirs_from_dict(dir_dict, root_path='tests/test_dir/dir_from_dict')
+
+    file_path_sub = [dir.path for dir in os.scandir("tests/test_dir/dir_from_dict/") if dir.is_dir()]
+    file_path_sub1 = [dir.path for dir in os.scandir("tests/test_dir/dir_from_dict/sub1") if dir.is_dir()]
+    file_path_sub2 = [dir.path for dir in os.scandir("tests/test_dir/dir_from_dict/sub2") if dir.is_dir()]
+
+    sub_contents = ['tests/test_dir/dir_from_dict/sub1',
+                    'tests/test_dir/dir_from_dict/sub2',
+                    'tests/test_dir/dir_from_dict/sub3']
+
+    sub1_contents = ['tests/test_dir/dir_from_dict/sub1/sub1_sub1',
+                     'tests/test_dir/dir_from_dict/sub1/sub1_sub2',]
+
+    sub2_contents = ['tests/test_dir/dir_from_dict/sub2/sub2_sub1']
+
+    assert(set(file_path_sub) == set(sub_contents))
+    assert(set(file_path_sub1) == set(sub1_contents))
+    assert(set(file_path_sub2) == set(sub2_contents))

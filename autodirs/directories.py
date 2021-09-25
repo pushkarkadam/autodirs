@@ -153,7 +153,7 @@ def dir_path_list(dirs, root_path='', list_dir=None):
 
     >>> import autodirs
     >>> foo_dict = {'sub1': {'sub1_sub1': [], 'sub1_sub2': []}, 'sub2': {'sub2_sub1': []}, 'sub3': []}
-    >>> foo_list = autodirs(foo_dict, root_path='main')
+    >>> foo_list = autodirs.dir_path_list(foo_dict, root_path='main')
     >>> print(foo_list)
     ['main/sub1/sub1_sub1', 'main/sub1/sub1_sub2', 'main/sub2/sub2_sub1', 'main/sub3']
     """
@@ -183,14 +183,25 @@ def dir_path_list(dirs, root_path='', list_dir=None):
 
     return list_dir
 
-def create_dirs_from_dict(dirs_dict, root_path=''):
+def create_dirs_from_dict(dir_dict, root_path=''):
+    """Creates a directory structure followed by the directory structure.
 
-    dir_list = dir_path_list(dirs_dict, root_path)
+    :param dir_dict: Dictionary of dictionaries that suggest the directory structure.
+    :param root_path: Path where the directories must be created.
+
+    :Example:
+
+    >>> import autodirs
+    >>> dir_dict = {'sub1': {'sub1_sub1': [], 'sub1_sub2': []}, 'sub2': {'sub2_sub1': []}, 'sub3': []}
+    >>> autodirs.create_dirs_from_dict(dir_dict)
+    """
+    dir_list = dir_path_list(dir_dict, root_path)
 
     for dir in dir_list:
         try:
             if not os.path.exists(dir):
                 os.makedirs(dir)
+                print(f"Directory: {dir} created!")
             else:
                 print(f"Directory: {dir} already exists!")
         except TypeError as e:
