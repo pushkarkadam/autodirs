@@ -140,7 +140,7 @@ def create_directories_from_list(dir_list, path="", with_text=False):
     _create_directories(dir_list, path, with_text)
 
 
-def _dir_path_list(dirs, root_path='', list_dir=None):
+def dir_path_list(dirs, root_path='', list_dir=None):
     """Generates a list of all the directory paths from the dirs dictionary
 
     :param dirs: A dictionary of complex directory structure where the last directory's key has a value of an empty list.
@@ -159,16 +159,16 @@ def _dir_path_list(dirs, root_path='', list_dir=None):
         list_dir = []
 
     for k, v in dirs.items():
-        dir = os.path.join(path, k)
+        dir_path = os.path.join(path, k)
 
         # Checks if the value is a of the type dictionary
         if isinstance(v, dict):
-            path = deepcopy(dir)
+            path = deepcopy(dir_path)
 
             # Recursive function call
-            _dir_path_list(v, path, list_dir)
+            dir_path_list(v, path, list_dir)
         else:
-            list_dir.append(dir)
+            list_dir.append(dir_path)
 
         # Again copying the root path before the next iteration
         path = deepcopy(root_path)
