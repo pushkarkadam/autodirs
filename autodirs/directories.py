@@ -182,3 +182,17 @@ def dir_path_list(dirs, root_path='', list_dir=None):
         path = deepcopy(root_path)
 
     return list_dir
+
+def create_dirs_from_dict(dirs_dict, root_path=''):
+
+    dir_list = dir_path_list(dirs_dict, root_path)
+
+    for dir in dir_list:
+        try:
+            if not os.path.exists(dir):
+                os.makedirs(dir)
+            else:
+                print(f"Directory: {dir} already exists!")
+        except TypeError as e:
+            print(e)
+            raise
