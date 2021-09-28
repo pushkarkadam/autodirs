@@ -3,6 +3,7 @@ import sys
 import glob
 import warnings
 from copy import deepcopy
+import itertools
 
 
 def _create_text_file(dir_name, path):
@@ -207,3 +208,113 @@ def create_dirs_from_dict(dir_dict, root_path=''):
         except TypeError as e:
             print(e)
             raise
+
+class Node:
+    """A class to create a tree node of the directories.
+
+    :param dir: Name of the directory.
+    """
+    def __init__(self, dir):
+        """Constructs all the necessary attributes for the Node object.
+
+        :param dir: Name of the directory.
+        """
+        # Removing white spaces
+        self.dir = dir.strip()
+
+        # Finding the levels by calculating the empty spaces in indentation
+        self.level = len(dir) - len(dir.lstrip())
+
+        self.children = []
+
+    def add_children(self, children):
+        """Takes a list of child node which are instance of Node class.
+        :param children: A list of child nodes of class Node.
+        """
+        child_level = children[0].level
+        # loop over while list is not empty
+        while children:
+            child = children.pop(0)
+
+            # Add node as a child
+            if child.level == child_level:
+                self.children.append(child)
+
+            # Add nodes as grandchildren of the last
+            elif child.level > child_level:
+                children.insert(0, child)
+                self.children[-1].add_children(children)
+
+            # Sibling node and no more children
+            elif child.level <= self.level:
+                children.insert(0, child)
+                return
+
+    def as_path(self):
+        """Creates a path of all the parent and child in the tree data structure.
+
+        :return: A list of directory paths.
+        """
+
+        if len(self.children) >= 1:
+            return [self.join_paths(dir=self.dir, sub=child.as_path()) for child in self.children]
+        else:
+            return [[self.dir]]
+
+    def join_paths(self, dir, sub):
+        """Takes a string and a list and makes a list.
+        :param dir: The parent Node with the dir attribute.
+        :param sub: A list of list containing all the child subdirectory.
+
+        :return paths: A list of all the paths in the directory structure.
+        """
+        paths = []
+
+        # Combining all the sub-lists to one list
+        sub = list(itertools.chain.from_iterable(sub))
+
+        # creating path for every child with parent node.
+        for s in sub:
+            paths.append(os.path.join(dir, s))
+
+        return paths
+
+    def get_path(self):
+        """Organises all the paths into one list"""
+        path = self.as_path()
+        all_path = list(itertools.chain.from_iterable(path))
+        return all_path
+
+def create_nested_dirs_from_text(text, root_path='root'):
+    """Creates a complex directory structure from a text file.
+
+    :param text: Path to the text file. (Example: ``example_text_file.txt``)
+    :root_path: Path where the directories must be created.
+    """
+
+    try:
+        with open(text) as f:
+            dirs = f.read().splitlines()
+    except Exception as e:
+        print(e)
+        raise
+
+    # Creates a root node
+    root = Node(root_path)
+
+    # Adds all the children to the root node
+    root.add_children([Node(dir) for dir in dirs if dir.strip()])
+
+    paths = root.get_path()
+
+    for path in paths:
+        for dir in dir_list:
+            try:
+                if not os.path.exists(dir):
+                    os.makedirs(dir)
+                    print(f"Directory: {dir} created!")
+                else:
+                    print(f"Directory: {dir} already exists!")
+            except TypeError as e:
+                print(e)
+                raise
