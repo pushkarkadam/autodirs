@@ -307,14 +307,13 @@ def create_nested_dirs_from_text(text, root_path='root'):
 
     paths = root.get_path()
 
-    for path in paths:
-        for dir in dir_list:
-            try:
-                if not os.path.exists(dir):
-                    os.makedirs(dir)
-                    print(f"Directory: {dir} created!")
-                else:
-                    print(f"Directory: {dir} already exists!")
-            except TypeError as e:
-                print(e)
-                raise
+    for dir in paths:
+        try:
+            if not os.path.exists(dir):
+                os.makedirs(dir)
+                print(f"Directory: {dir} created!")
+            else:
+                print(f"Directory: {dir} already exists!")
+        except TypeError as e:
+            print(e)
+            raise

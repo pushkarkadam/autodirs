@@ -86,3 +86,28 @@ def test_create_dirs_from_dict():
     assert(set(file_path_sub) == set(sub_contents))
     assert(set(file_path_sub1) == set(sub1_contents))
     assert(set(file_path_sub2) == set(sub2_contents))
+
+def test_create_nested_dirs_from_text():
+    autodirs.create_nested_dirs_from_text(text="tests/nested_test_file.txt", root_path="tests/test_dir/nested")
+
+    # Gets: PLANETS, MAYORS
+    file_path_sub1 = [dir.path for dir in os.scandir("tests/test_dir/nested/") if dir.is_dir()]
+
+    # Gets: PLANETS/TRANTOR, PLANETS/TERMINUS, PLANETS/ANACREON
+    file_path_sub2 = [dir.path for dir in os.scandir("tests/test_dir/nested/PLANETS") if dir.is_dir()]
+
+    # Gets: PLANETS/TRANTOR/MYCOGEN, PLANETS/TRANTOR/IMPERIAL
+    file_path_sub3 = [dir.path for dir in os.scandir("tests/test_dir/nested/PLANETS/TRANTOR") if dir.is_dir()]
+
+    # Gets: PLANETS/TRANTOR/IMPERIAL/PALACE
+    file_path_sub4 = [dir.path for dir in os.scandir("tests/test_dir/nested/PLANETS/TRANTOR/IMPERIAL") if dir.is_dir()]
+
+    sub1_contents = ["tests/test_dir/nested/PLANETS", "tests/test_dir/nested/MAYORS"]
+    sub2_contents = ["tests/test_dir/nested/PLANETS/TRANTOR", "tests/test_dir/nested/PLANETS/TERMINUS", "tests/test_dir/nested/PLANETS/ANACREON"]
+    sub3_contents = ["tests/test_dir/nested/PLANETS/TRANTOR/MYCOGEN", "tests/test_dir/nested/PLANETS/TRANTOR/IMPERIAL"]
+    sub4_contents = ["tests/test_dir/nested/PLANETS/TRANTOR/IMPERIAL/PALACE"]
+
+    assert(set(file_path_sub1) == set(sub1_contents))
+    assert(set(file_path_sub2) == set(sub2_contents))
+    assert(set(file_path_sub3) == set(sub3_contents))
+    assert(set(file_path_sub4) == set(sub4_contents))
