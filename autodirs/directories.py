@@ -290,6 +290,11 @@ def create_nested_dirs_from_text(text, root_path='root'):
 
     :param text: Path to the text file. (Example: ``example_text_file.txt``)
     :root_path: Path where the directories must be created.
+
+    :Example:
+
+    >>> import autodirs
+    >>> autodirs.create_nested_dirs_from_text(text='textfile.txt', root_path='root')
     """
 
     try:
