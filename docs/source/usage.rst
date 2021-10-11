@@ -81,3 +81,39 @@ If you want to create directories from the list use the following code::
     di.create_directories_from_list(ravenclaw, path="house")
 
 Checkout the examples for more details.
+
+
+Create directories from nested dictionary
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+This function is beneficial if you are building a software architecture where you need a function
+to create a directory structure.
+
+To create a nested directory structure using a dictionary use the following code::
+
+    import autodirs.directories as di
+
+    dir_dict = {'sub1': {'sub1_sub1': [], 'sub1_sub2': []}, 'sub2': {'sub2_sub1': []}, 'sub3': []}
+
+    di.create_dirs_from_dict(dir_dict, root_path='dirs_from_dict')
+
+
+Create nested directories from a text file with indentation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For an easy way to create a directory structure, prepare a text file with .txt extension.
+
+The text file can contain a nested directory structure as follows::
+
+    PLANETS
+        TRANTOR
+            MYCOGEN
+            IMPERIAL
+                PALACE
+        TERMINUS
+        ANACREON
+    MAYORS
+
+Then use the following code to create the above mentioned nested directory structure::
+
+    import autodirs.directories as di
+    autodirs.create_nested_dirs_from_text(text='textfile.txt', root_path='root')

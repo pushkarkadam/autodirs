@@ -22,6 +22,8 @@ Features
 - Create directories from text files
 - Group by text Files
 - Create directories from list
+- Create a nested directory structure from a dictionary
+- Create a nested directory structure from a text file
 
 Installation
 ------------
